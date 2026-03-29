@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket       = "leolms-tfstate-files"
-    key          = "networking/terraform.tfstate"
+    key          = "cluster/terraform.tfstate"
     region       = "us-east-1"
     use_lockfile = true
     encrypt      = true

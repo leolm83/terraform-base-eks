@@ -63,3 +63,11 @@ variable "vpc" {
     ]
   }
 }
+
+variable "tags" {
+  type = map(string)
+  default = {
+    "Project"     = "leolms-base-project"
+    "Environment" = "dev"
+  }
+}
