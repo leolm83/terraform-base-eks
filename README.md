@@ -30,9 +30,19 @@ link para fazer a configuracao: [configuracao CLI AWS](https://docs.aws.amazon.c
 
 
 ## para utilizar esse codigo é necessario definir a variavel do terraform:
+essas sao as credenciais para que o terraform use ao acessar a AWS
 ```
 export TF_VAR_assume_role='{
     role_arn    = "value",
     external_id = "value"
   }'
 ```
+configure o arn do seu usuario que ira ter acesso ao cluster
+```
+TF_VAR_principal_arn='value'
+```
+
+# configurar o kubectl apos terminar de configurar o cluster
+
+aws eks update-kubeconfig --region <nome-da-regiao> --name <nome-do-cluster>
+

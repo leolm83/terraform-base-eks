@@ -27,6 +27,22 @@ variable "eks_cluster" {
     access_config = object({
       authentication_mode = string
     })
+    node_group = object({
+      name           = string
+      instance_types = list(string)
+      capacity_type  = string
+      ami_type       = string
+      disk_size      = number
+      scaling_config = object({
+        desired_size = number
+        max_size     = number
+        min_size     = number
+      })
+      update_config = object({
+        max_unavailable = number
+      })
+
+    })
   })
   default = {
     name      = "leolms-cluster"
@@ -42,5 +58,23 @@ variable "eks_cluster" {
     access_config = {
       authentication_mode = "API_AND_CONFIG_MAP"
     }
+    node_group = {
+      name           = "leolms-eks-node-group"
+      instance_types = ["t2.micro"]
+      capacity_type  = "ON_DEMAND"
+      ami_type       = "AL2023_x86_64_STANDARD"
+      disk_size      = 20
+      scaling_config = {
+        desired_size = 2
+        max_size     = 3
+        min_size     = 1
+      }
+      update_config = {
+        max_unavailable = 2
+      }
+    }
   }
+}
+variable "principal_arn" {
+  type = string
 }
