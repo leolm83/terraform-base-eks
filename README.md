@@ -46,3 +46,13 @@ TF_VAR_principal_arn='value'
 
 aws eks update-kubeconfig --region <nome-da-regiao> --name <nome-do-cluster>
 
+# para saber a versao do addon basta executar(substitua metrics-server pelo nome do addon desejado): 
+```
+aws eks describe-addon-versions --addon-name metrics-server
+
+```
+
+para testar se o addon de metrics-server esta ok, use o comando
+```
+kubectl to node
+```
