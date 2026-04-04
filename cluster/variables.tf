@@ -47,7 +47,7 @@ variable "eks_cluster" {
   default = {
     name      = "leolms-cluster"
     role_name = "leolms-eks-cluster-role"
-    version   = "1.32"
+    version   = "1.35"
     enabled_cluster_log_types = [
       "api",
       "audit",
@@ -60,7 +60,7 @@ variable "eks_cluster" {
     }
     node_group = {
       name           = "leolms-eks-node-group"
-      instance_types = ["t2.micro"]
+      instance_types = ["t3.medium"]
       capacity_type  = "ON_DEMAND"
       ami_type       = "AL2023_x86_64_STANDARD"
       disk_size      = 20

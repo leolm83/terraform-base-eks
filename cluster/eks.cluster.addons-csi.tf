@@ -3,15 +3,16 @@ resource "aws_eks_addon" "container_storage_interface" {
   addon_name               = "aws-ebs-csi-driver"
   service_account_role_arn = aws_iam_role.container_storage_interface.arn
 }
+
 resource "aws_iam_role" "container_storage_interface" {
   name = "AmazonEKS_EFS_CSI_DriverRole"
 
   assume_role_policy = jsonencode({
     Statement = [{
-      Action = "sts:AssumeRoleWithWebIdentity"
       Effect = "Allow"
+      Action = "sts:AssumeRoleWithWebIdentity"
       Principal = {
-        federated = aws_iam_openid_connect_provider.kubernetes.arn
+        Federated = aws_iam_openid_connect_provider.kubernetes.arn
       }
       Condition = {
         StringEquals = {
@@ -23,7 +24,9 @@ resource "aws_iam_role" "container_storage_interface" {
     Version = "2012-10-17"
   })
 }
+
+
 resource "aws_iam_role_policy_attachment" "container_storage_interface_AmazonEBSCSIDriverPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
-  role       = aws_iam_role.eks_cluster.name
+  role       = aws_iam_role.container_storage_interface.name
 }
